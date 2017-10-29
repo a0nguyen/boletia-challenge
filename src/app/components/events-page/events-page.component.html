@@ -1,0 +1,43 @@
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br>
+    <br>
+    <h1 class="header orange-text center">Encuentra los mejores eventos.</h1>
+    <br>
+    <br>
+    <div class="row center">
+      <div class="input-field col s8 push-s2">
+        <input [(ngModel)]="idOfEvent" (click)="onInputClick($event)" (focusout)="onFocusOut($event)" id="eventId" name="eventId"
+          class="col s12" (ngModelChange)="valuechange($event)">
+        <label for="eventId" [attr.className]="idOfEvent ? 'active' : ''">Buscar evento por id</label>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row center" *ngIf="event">
+      <div class="card col s8 push-s2">
+        <div class="card-image">
+          <img [attr.src]="event.pictureUrl">
+        </div>
+        <div class="card-content">
+          <p>{{event.name}}</p>
+        </div>
+        <div class="card-action">
+          <form name="changeCom" class="col s12" #changeCom="ngForm" (ngSubmit)="submit()">
+            <div class="input-field col s12">
+              <input (click)="onInputClick($event)" [(ngModel)]="comissionCard" id="eventComCard" name="eventComCard"
+                (ngModelChange)="valuechange($event)">
+              <label for="eventComCard" class="active">agregar comisiones personalizadas par tarjetas</label>
+            </div>
+            <div class="input-field col s12">
+              <input (click)="onInputClick($event)" [(ngModel)]="comissionDeposit" id="eventComDep" name="eventComDep"
+               (ngModelChange)="valuechange($event)">
+              <label for="eventComDep" class="active">agregar comisiones personalizadas para depositos</label>
+            </div>
+            <button class="col s6 push-s3 btn-large waves-effect waves-light orange">Update comissions</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="section no-pad-bot" id="index-banner" *ngIf="event">
+  <div class="container">
+    <br>
+    <br>
+    <h1 class="header orange-text center">Comprar tus boletos para {{event.name}}</h1>
+    <br>
+    <br>
+    <br>
+    <form name="createBooking" #changeCom="ngForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col s11 push-s1">
+          <h5>
+            <span style="font-size:15px" class="orange-text">1
+              <i class="material-icons orange-text" style="font-size:10px">arrow_forward</i>
+            </span>
+            <span class="grey-text text-darken-2">Que precio va a tener el boleto?</span>
+          </h5>
+          <p class="grey-text">Ingresa el precio del boleto para el evento</p>
+        </div>
+        <div class="input-field push-s1 col s8">
+          <input id="price" [(ngModel)]="price" name="price" type="number" class="validate">
+        </div>
+        <div class="col s11 push-s1">
+          <h5>
+            <span style="font-size:15px" class="orange-text">2
+              <i class="material-icons orange-text" style="font-size:10px">arrow_forward</i>
+            </span>
+            <span class="grey-text text-darken-2">Cuantos boletos queres?</span>
+          </h5>
+        </div>
+        <div class="input-field col s8 push-s1 e2e-quantity">
+          <select class="grey-text text-darken-2" id="quantity">
+            <option value="" disabled selected>Selectiona la quatidad de boletos que desees</option>
+            <ng-container *ngFor="let number of [1,2,3,4,5,6,7,8,9,10]">
+              <option value="number">{{number}}</option>
+            </ng-container>
+          </select>
+        </div>
+        <div class="col s11 push-s1">
+          <h5>
+            <span style="font-size:15px" class="orange-text">3
+              <i class="material-icons orange-text" style="font-size:10px">arrow_forward</i>
+            </span>
+            <span class="grey-text text-darken-2">Como vas a pagar?</span>
+          </h5>
+        </div>
+        <div class="input-field col s8 push-s1 e2e-payment">
+          <select class="grey-text text-darken-2" id="paymentMehod">
+            <option value="" disabled selected>Selectiona tu metodo de pago</option>
+            <option value="card">Quiero pagar con tarjeta</option>
+            <option value="deposit">Quiero pagar por depositon</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <br>
+        <br>
+        <button class="col push-s1 s3 btn-large waves-effect waves-light orange">Crear booking</button>
+      </div>
+
+    </form>
+    <br>
+    <br>
+  </div>
+</div>

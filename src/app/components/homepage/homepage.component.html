@@ -1,0 +1,39 @@
+<div class="section no-pad-bot" style="background-image: url('https://bltassets-cdn3.global.ssl.fastly.net/images/home/home-02.jpg'); background-size: cover"
+  id="index-banner">
+  <div class="container">
+    <br>
+    <br>
+    <h1 class="header white-text center">Confiable. Práctico. Personalizado.</h1>
+    <div class="row center">
+      <h5 class="header col white-text s12 light">Somos tu mano derecha organizando eventos.</h5>
+    </div>
+    <div class="row center">
+      <a routerLink="/events" class="btn-large waves-effect waves-light orange">¡Empieza ya!</a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+</div>
+<div class="container" *ngIf="events">
+  <h1>No te lo podes perder</h1>
+  <div class="row center">
+    <div *ngFor="let event of events" class="card col s3">
+      <div class="card-image">
+        <img [attr.src]="event.pictureUrl">
+      </div>
+      <div class="card-content">
+        <p>{{event.name}}</p>
+      </div>
+      <div class="card-action">
+          <a [routerLink]="['events', event.id, 'book']">Reservar</a>          
+      </div>
+    </div>
+  </div>
+
+</div>
