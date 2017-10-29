@@ -1,0 +1,12 @@
+{
+    "name": "calculate-comission-and-total",
+    "description": "calculate comission and total",
+    "private": true,
+    "devDependencies": {
+        "chai": "^4.1.2",
+        "mocha": "^4.0.1"
+    },
+    "scripts": {
+        "test": "mocha --reporter nyan"
+    }
+}

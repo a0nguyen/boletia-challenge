@@ -18,6 +18,7 @@ export class EventsPageComponent implements OnInit {
   event: Event;
   comissionDeposit: number;
   comissionCard: number;
+  eventKey: string
 
   ngOnInit() {
   }
@@ -26,9 +27,10 @@ export class EventsPageComponent implements OnInit {
     if (isNumeric(this.idOfEvent)) {
       this.dbService.getEventsById(this.idOfEvent).subscribe(event => {
         this.event = new Event().deserialize(event.payload.val(), event.key)
-        if (this.comissionCard == null || !this.comissionDeposit == null) {
-          this.comissionCard = this.event.comissionCard
-          this.comissionDeposit = this.event.comissionDeposit
+        if(this.event.id != this.eventKey){
+          this.eventKey = this.event.id
+          this.comissionCard = this.event.comissionCard      
+          this.comissionDeposit = this.event.comissionDeposit          
         }
       })
     }

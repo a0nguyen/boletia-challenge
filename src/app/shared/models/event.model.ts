@@ -1,6 +1,6 @@
 
 export class Event {
-    id: number;
+    id: string;
     pictureUrl: string
     comissionCard: number
     comissionDeposit: number    

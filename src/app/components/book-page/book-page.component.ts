@@ -37,7 +37,6 @@ export class BookPageComponent implements OnInit {
   }
 
   changeQuantity(event) {
-    debugger
     this.quantity = +event.target.outerText
   }
 

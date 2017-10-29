@@ -6,6 +6,8 @@ export class Transaction {
     paymentMethod: string    
     price: number
     quantity: number
+    totalPrice: number
+    totalComission: number
 
     deserialize(json: any, id: any) {
         this.id = id;
@@ -13,7 +15,9 @@ export class Transaction {
         this.eventName = json.event_name
         this.paymentMethod = json.payment_method        
         this.quantity = json.quantity
-        this.price = json.price        
+        this.totalComission = json.total_comission
+        this.price = json.price      
+        this.totalPrice = json.total  
         return this;
     }
 }
