@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatMenuModule, MatToolbarModule, MatIconModule, MatCardModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import 'hammerjs';
@@ -36,7 +34,7 @@ export const firebaseConfig = {
     ReceiptPageComponent
   ],
   imports: [
-    AngularFireModule.initializeApp(firebaseConfig), AngularFireDatabaseModule, FormsModule, AppRoutingModule, BrowserModule, BrowserAnimationsModule, MatButtonModule, MatCheckboxModule, MatMenuModule, MatToolbarModule, MatIconModule, MatCardModule
+    AngularFireModule.initializeApp(firebaseConfig), AngularFireDatabaseModule, FormsModule, AppRoutingModule, BrowserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
