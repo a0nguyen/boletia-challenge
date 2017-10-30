@@ -28,7 +28,14 @@ export class DatabaseService {
 
   pushBooking(event: Event, paymentMethod: string, price: number, quantity: number) {
     var timestamp = new Date().getTime();
-    return this.firebaseDb.list("transactions").push({ event_id: event.id, event_name: event.name, payment_method: paymentMethod, price: price, quantity: quantity, id: timestamp, card_comission: event.comissionCard, deposit_comission: event.comissionDeposit }).key
+    var record = { event_id: event.id, event_name: event.name, payment_method: paymentMethod, price: price, quantity: quantity, id: timestamp }
+    if(event.comissionDeposit){
+      record["deposit_comission"] = event.comissionDeposit
+    }
+    if(event.comissionCard){
+      record["card_comission"] = event.comissionCard
+    }
+    return this.firebaseDb.list("transactions").push(record).key
   }
 
 }

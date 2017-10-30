@@ -25,14 +25,14 @@
         <div class="card-action">
           <form name="changeCom" class="col s12" #changeCom="ngForm" (ngSubmit)="submit()">
             <div class="input-field col s12">
-              <input (click)="onInputClick($event)" [(ngModel)]="comissionCard" id="eventComCard" name="eventComCard"
+              <input (click)="onInputClick($event)" type="number" [(ngModel)]="comissionCard" id="event-comission-card" name="event-comission-card"
                 (ngModelChange)="valuechange($event)">
-              <label for="eventComCard" class="active">agregar comisiones personalizadas par tarjetas</label>
+              <label for="event-comission-card" class="active">agregar comisiones personalizadas para tarjetas en %</label>
             </div>
             <div class="input-field col s12">
-              <input (click)="onInputClick($event)" [(ngModel)]="comissionDeposit" id="eventComDep" name="eventComDep"
+              <input (click)="onInputClick($event)" type="number" [(ngModel)]="comissionDeposit" id="event-comission-deposit" name="event-comission-deposit"
                (ngModelChange)="valuechange($event)">
-              <label for="eventComDep" class="active">agregar comisiones personalizadas para depositos</label>
+              <label for="event-comission-deposit" class="active">agregar comisiones personalizadas para depositos en $</label>
             </div>
             <button class="col s6 push-s3 btn-large waves-effect waves-light orange">Update comissions</button>
           </form>

@@ -6,7 +6,7 @@ import { Event } from '../../shared/models/event.model';
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
-  providers: [DatabaseService],  
+  providers: [DatabaseService],
 })
 export class HomepageComponent implements OnInit {
 
@@ -19,7 +19,9 @@ export class HomepageComponent implements OnInit {
     this.dbService.getEvents().subscribe(events => {
       this.events = []
       events.forEach(element => {
-        this.events.push(new Event().deserialize(element.payload.val(), element.key))
+        if (element.key != "lArEsa124") {
+          this.events.push(new Event().deserialize(element.payload.val(), element.key))
+        }
       });
     })
   }

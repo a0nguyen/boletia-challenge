@@ -22,7 +22,7 @@ module.exports = function () {
         calculateTotalComission() {
             if (this.comissionType == "percent") {
                 this.totalComission = this.quantity * this.comission * this.unitPrice;
-            } else {                               
+            } else {     
                 this.totalComission = this.quantity * this.comission;
             }
             this.totalComission = Math.round(this.totalComission, -2)

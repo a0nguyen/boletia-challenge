@@ -13,14 +13,14 @@ exports.calculateComissionsAndTotal = functions.database.ref('/transactions/{pus
 
     var eventComissions = []
     if (transaction.card_comission) {
-      eventComissions.push(new EventComission(cardPaymentMethod, transaction.desposit_comission ));
+      eventComissions.push(new EventComission(cardPaymentMethod, transaction.card_comission));
     }
-    if (transaction.desposit_comission) {
-      eventComissions.push(new EventComission(depositPaymentMethod, transaction.desposit_comission ));
+    if (transaction.deposit_comission) {
+      eventComissions.push(new EventComission(depositPaymentMethod, transaction.deposit_comission));
     }
 
-    const results = new CalculateComissionAndTotal(eventComissions, [cardPaymentMethod, depositPaymentMethod], transaction.payment_method, transaction.quantity, transaction.price ).call()
-
+    const results = new CalculateComissionAndTotal(eventComissions, [cardPaymentMethod, depositPaymentMethod], transaction.payment_method, transaction.quantity, transaction.price).call()
     return event.data.ref.update({ total_comission: results.total_comission, total: results.total_price });
-
   });
+
+  // run cloud functions calculateComissionsAndTotal({after: { card_comission: "0.1", deposit_comission: "4", event_id: "2", event_name: "concierto de j balvin", id: 1509330471937, payment_method: "deposit", price: 200, quantity: 2}})

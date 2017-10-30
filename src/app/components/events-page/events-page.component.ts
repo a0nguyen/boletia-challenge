@@ -19,6 +19,7 @@ export class EventsPageComponent implements OnInit {
   comissionDeposit: number;
   comissionCard: number;
   eventKey: string
+  updated: boolean = false;
 
   ngOnInit() {
   }
@@ -27,10 +28,11 @@ export class EventsPageComponent implements OnInit {
     if (isNumeric(this.idOfEvent)) {
       this.dbService.getEventsById(this.idOfEvent).subscribe(event => {
         this.event = new Event().deserialize(event.payload.val(), event.key)
-        if(this.event.id != this.eventKey){
+        if (this.event.id != this.eventKey || this.updated) {
           this.eventKey = this.event.id
-          this.comissionCard = this.event.comissionCard      
-          this.comissionDeposit = this.event.comissionDeposit          
+          this.comissionCard =  this.round(this.event.comissionCard * 100, 2)
+          this.comissionDeposit = this.event.comissionDeposit
+          this.updated = false
         }
       })
     }
@@ -51,12 +53,14 @@ export class EventsPageComponent implements OnInit {
   }
 
   submit() {
-    if (!isNumeric(this.comissionCard) && !isNumeric(this.comissionDeposit)){
-      Materialize.toast('<span><i class="material-icons">error</i></span><span>&nbsp; Por favor ingresa numeros para las comisiones</span>', 4000, 'red lighten-1')      
-    }
-    else {
-      this.dbService.updateEvent(this.idOfEvent, this.comissionDeposit, this.comissionCard)      
-    }
+      this.dbService.updateEvent(this.idOfEvent, this.comissionDeposit, (this.comissionCard / 100))
+      this.updated = true
   }
 
+  round(number, precision) {
+    var factor = Math.pow(10, precision);
+    var tempNumber = number * factor;
+    var roundedTempNumber = Math.round(tempNumber);
+    return roundedTempNumber / factor;
+  };
 }
