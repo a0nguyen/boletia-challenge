@@ -25,6 +25,7 @@ exports.calculateComissionsAndTotal = functions.database.ref('/transactions/{pus
     }
 
     const results = new CalculateComissionAndTotal(transaction, getComissions, [cardPaymentMethod, depositPaymentMethod], transaction.payment_method, transaction.quantity, transaction.price).call()
+    console.log("RESULTS : total comissions : ", results.total_comission, "total price : ", results.total_price)
     return event.data.ref.update({ total_comission: results.total_comission, total: results.total_price });
   });
 

@@ -55,6 +55,7 @@ export class EventsPageComponent implements OnInit {
   submit() {
       this.dbService.updateEvent(this.idOfEvent, this.comissionDeposit, (this.comissionCard / 100))
       this.updated = true
+      Materialize.toast('<span>Hicimos update de las comisiones del evento</span>', 4000, 'green lighten-1')      
   }
 
   round(number, precision) {

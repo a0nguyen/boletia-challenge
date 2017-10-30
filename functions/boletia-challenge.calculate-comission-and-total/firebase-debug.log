@@ -1,0 +1,24 @@
+[debug] [2017-10-30T22:12:48.673Z] ----------------------------------------------------------------------
+[debug] [2017-10-30T22:12:48.677Z] Command:       /usr/local/Cellar/node/7.10.0/bin/node /usr/local/bin/firebase experimental:functions:shell
+[debug] [2017-10-30T22:12:48.677Z] CLI Version:   3.13.1
+[debug] [2017-10-30T22:12:48.677Z] Platform:      darwin
+[debug] [2017-10-30T22:12:48.677Z] Node Version:  v7.10.0
+[debug] [2017-10-30T22:12:48.678Z] Time:          Mon Oct 30 2017 16:12:48 GMT-0600 (CST)
+[debug] [2017-10-30T22:12:48.678Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-30T22:12:48.700Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-30T22:12:48.700Z] > authorizing via signed-in user
+[debug] [2017-10-30T22:12:48.703Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/boletia-challenge  
+ Mon Oct 30 2017 16:12:48 GMT-0600 (CST)
+[debug] [2017-10-30T22:12:49.519Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-30T22:12:49.521Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/boletia-challenge/tokens  
+ Mon Oct 30 2017 16:12:49 GMT-0600 (CST)
+[debug] [2017-10-30T22:12:50.332Z] <<< HTTP RESPONSE 200
+[info] i  functions: Preparing to emulate functions.
+[debug] [2017-10-30T22:12:51.129Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/boletia-challenge  
+ Mon Oct 30 2017 16:12:51 GMT-0600 (CST)
+[debug] [2017-10-30T22:12:51.129Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/boletia-challenge/apiKeys  
+ Mon Oct 30 2017 16:12:51 GMT-0600 (CST)
+[debug] [2017-10-30T22:12:51.720Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-30T22:12:51.898Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: calculateComissionsAndTotal
