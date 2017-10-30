@@ -6,20 +6,25 @@ require('./boletia-challenge.calculate-comission-and-total/boletia-challenge.cal
 
 exports.calculateComissionsAndTotal = functions.database.ref('/transactions/{pushId}')
   .onWrite(event => {
-    // Grab the current value of what was written to the Realtime Database.
+
     const transaction = event.data.val();
-    var cardPaymentMethod = new PaymentMethod("card", "0.035", "percent");
-    var depositPaymentMethod = new PaymentMethod("deposit", "10", "uint");
+    //default value
+    var cardPaymentMethod = { name: "card", comission: "0.035", calculFunction: (quantity, comission, price) => { return quantity * comission * price } }
+    var depositPaymentMethod = { name: "deposit", comission: 10, calculFunction: (quantity, comission, price) => { return quantity * comission } }
 
-    var eventComissions = []
-    if (transaction.card_comission) {
-      eventComissions.push(new EventComission(cardPaymentMethod, transaction.card_comission));
-    }
-    if (transaction.deposit_comission) {
-      eventComissions.push(new EventComission(depositPaymentMethod, transaction.deposit_comission));
+    //way of getting comissions from transaction
+    getComissions = (transaction) => {
+      var eventComissions = []
+      if (transaction.card_comission) {
+        eventComissions.push({ paymentMethod: cardPaymentMethod, comission: transaction.card_comission });
+      }
+      if (transaction.deposit_comission) {
+        eventComissions.push({ paymentMethod: depositPaymentMethod, comission: transaction.deposit_comission });
+      }
+      return eventComissions
     }
 
-    const results = new CalculateComissionAndTotal(eventComissions, [cardPaymentMethod, depositPaymentMethod], transaction.payment_method, transaction.quantity, transaction.price).call()
+    const results = new CalculateComissionAndTotal(transaction, getComissions, [cardPaymentMethod, depositPaymentMethod], transaction.payment_method, transaction.quantity, transaction.price).call()
     return event.data.ref.update({ total_comission: results.total_comission, total: results.total_price });
   });
 

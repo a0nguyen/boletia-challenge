@@ -1,7 +1,7 @@
 module.exports = function () {
     this.CalculateComissionAndTotal = class CalculateComissionAndTotal {
-        constructor(eventComissions, paymentMethods, paymentMethodName, quantity, unitPrice) {
-            this.listOfEventComission = eventComissions
+        constructor(transaction, functionToGetComission, paymentMethods, paymentMethodName, quantity, unitPrice) {
+            this.listOfEventComission = functionToGetComission(transaction)
             this.listOfPaymentMethod = paymentMethods
             this.paymentMethodName = paymentMethodName
             this.quantity = quantity
@@ -15,17 +15,12 @@ module.exports = function () {
             var defaultComission = this.listOfPaymentMethod.filter((paymentMethod) => {
                 return paymentMethod.name == this.paymentMethodName;
             });
-            this.comissionType = comissionFromEvent[0] && comissionFromEvent[0].paymentMethod.type ? comissionFromEvent[0].paymentMethod.type : defaultComission[0].type
+            this.comissionCalcul = comissionFromEvent[0] && comissionFromEvent[0].paymentMethod.calculFunction ? comissionFromEvent[0].paymentMethod.calculFunction : defaultComission[0].calculFunction
             this.comission = comissionFromEvent[0] ? comissionFromEvent[0].comission : defaultComission[0].comission
         }
 
         calculateTotalComission() {
-            if (this.comissionType == "percent") {
-                this.totalComission = this.quantity * this.comission * this.unitPrice;
-            } else {     
-                this.totalComission = this.quantity * this.comission;
-            }
-            this.totalComission = Math.round(this.totalComission, -2)
+            this.totalComission = Math.round(this.comissionCalcul(this.quantity, this.comission, this.unitPrice), -2)
         }
 
         calculateTotalPrice() {
@@ -48,10 +43,10 @@ module.exports = function () {
         },
 
         this.PaymentMethod = class PaymentMethod {
-            constructor(name, defaultComission, type) {
+            constructor(name, defaultComission, calculFunction) {
                 this.name = name;
                 this.comission = defaultComission
-                this.type = type
+                this.calculFunction = calculFunction
             }
         }
 }
