@@ -11,10 +11,10 @@ module.exports = function () {
         }
 
         getPaymentMethodComission() {
-            if (this.event.comissions && this.event.comissions[this.paymentMethodName]) {
+            if (this.event.comissions && this.event.comissions[this.paymentMethodName] && this.event.comissions[this.paymentMethodName].fixed && this.event.comissions[this.paymentMethodName].percent) {
                 this.comission = { fixed: this.event.comissions[this.paymentMethodName].fixed, percent: this.event.comissions[this.paymentMethodName].percent }
             }
-            else if (this.user.comissions && this.user.comissions[this.paymentMethodName]) {
+            else if (this.user.comissions && this.user.comissions[this.paymentMethodName] && this.user.comissions[this.paymentMethodName].fixed && this.user.comissions[this.paymentMethodName].percent ) {
                 this.comission = { fixed: this.user.comissions[this.paymentMethodName].fixed, percent: this.user.comissions[this.paymentMethodName].percent }
             } else {
                 this.comission = this.defaultComissions[this.paymentMethodName]

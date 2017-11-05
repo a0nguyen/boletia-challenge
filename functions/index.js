@@ -7,10 +7,10 @@ require('./boletia-challenge.calculate-comission-and-total/boletia-challenge.cal
 exports.calculateComissionsAndTotal = functions.database.ref('/transactions/{pushId}')
   .onWrite(dbEvent => {
 
-    const transaction = dbEvent.data.val();
+    var transaction = dbEvent.data.val();
 
     const boletiaFixed = 5
-    var defaultComissions = { card: { fixed: 5, percent: 3.5 }, deposit: { fixed: 2, percent: 2.5 } }
+    const defaultComissions = { card: { fixed: 5, percent: 3.5 }, deposit: { fixed: 2, percent: 2.5 } }
 
     return admin.database()
       .ref(`/events/${transaction.event_id}`)
@@ -19,7 +19,8 @@ exports.calculateComissionsAndTotal = functions.database.ref('/transactions/{pus
         admin.database()
           .ref(`/users/${event.user_id}`).once('value', (snapshot) => {
             var user = snapshot.val();
-            var results = new CalculateComissionAndTotal(user, event, defaultComissions, "card", transaction, boletiaFixed).call();  
+            console.log("DEBUG : user comission ", user.comissions, "transaction ", transaction)
+            var results = new CalculateComissionAndTotal(user, event, defaultComissions, transaction.payment_method, transaction, boletiaFixed).call();  
             console.log("RESULTS : total comissions : ", results.total_comission, "total price : ", results.total_price)            
             dbEvent.data.ref.update({ total_comission: results.total_comission, total: results.total_price });            
           })

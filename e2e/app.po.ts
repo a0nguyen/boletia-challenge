@@ -3,6 +3,7 @@ import { browser, element, by } from 'protractor';
 
 export const path = require('path');
 export const sleepTime = 500;
+export const smallSleepTime = 1000;
 export const mediumSleepTime = 2000;
 export const longSleepTime = 4000
 

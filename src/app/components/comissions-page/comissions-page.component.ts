@@ -22,7 +22,7 @@ export class ComissionsPageComponent implements OnInit {
   user: User
 
   userKey: string
-  eventKey: string  
+  eventKey: string
 
   updated: boolean = false;
 
@@ -36,12 +36,7 @@ export class ComissionsPageComponent implements OnInit {
   constructor(public route: ActivatedRoute, public router: Router, public dbService: DatabaseService, public comisionHelperService: ComisionHelperService) { }
 
   ngOnInit() {
-    this.route.params
-      .switchMap((params: Params) => this.dbService.getEventsById(params['id']))
-      .subscribe(event => {
-        this.event = new Event().deserialize(event.payload.val(), event.key)
-        this.getUser();
-      })
+    this.getEvent()
   }
 
   getEvent() {
@@ -61,8 +56,8 @@ export class ComissionsPageComponent implements OnInit {
   }
 
   getUser() {
-    this.dbService.getUserById(this.event.id).subscribe(user => {
-      var json = user.payload.val()      
+    this.dbService.getUserById(this.event.userId).subscribe(user => {
+      var json = user.payload.val()
       this.user = new User().deserialize(json, user.key)
       if (this.updated || this.user.id != this.userKey) {
         if (json.comissions) {
@@ -76,18 +71,10 @@ export class ComissionsPageComponent implements OnInit {
   }
 
   submit() {
-    if (this.comisionHelperService.isComissionEmpty(this.userDepositComission)) {
-      this.dbService.updateUser(this.user.id, "deposit", this.userDepositComission.fixed, this.userDepositComission.percent)
-    }
-    if (this.comisionHelperService.isComissionEmpty(this.userCardComission)) {
-      this.dbService.updateUser(this.user.id, "card", this.userCardComission.fixed, this.userCardComission.percent)
-    }
-    if (this.comisionHelperService.isComissionEmpty(this.eventCardComission)) {
-      this.dbService.updateEvent(this.event.id, "card", this.eventCardComission.fixed, this.eventCardComission.percent)
-    }
-    if (this.comisionHelperService.isComissionEmpty(this.eventDepositComission)) {
-      this.dbService.updateEvent(this.event.id, "deposit", this.eventDepositComission.fixed, this.eventDepositComission.percent)
-    }
+    this.dbService.updateUser(this.user.id, "deposit", this.userDepositComission.fixed, this.userDepositComission.percent)
+    this.dbService.updateUser(this.user.id, "card", this.userCardComission.fixed, this.userCardComission.percent)
+    this.dbService.updateEvent(this.event.id, "card", this.eventCardComission.fixed, this.eventCardComission.percent)
+    this.dbService.updateEvent(this.event.id, "deposit", this.eventDepositComission.fixed, this.eventDepositComission.percent)
     this.updated = true
   }
 
