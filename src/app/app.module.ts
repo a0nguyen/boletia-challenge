@@ -14,6 +14,8 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { EventsPageComponent } from './components/events-page/events-page.component';
 import { BookPageComponent } from './components/book-page/book-page.component';
 import { ReceiptPageComponent } from './components/receipt-page/receipt-page.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
+import { ComissionsPageComponent } from './components/comissions-page/comissions-page.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCxQnD5Zsoei1TR_R1JRX0y--NcCloCRLk",
@@ -31,7 +33,9 @@ export const firebaseConfig = {
     HomepageComponent,
     EventsPageComponent,
     BookPageComponent,
-    ReceiptPageComponent
+    ReceiptPageComponent,
+    EventCardComponent,
+    ComissionsPageComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig), AngularFireDatabaseModule, FormsModule, AppRoutingModule, BrowserModule,

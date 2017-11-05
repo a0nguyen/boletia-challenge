@@ -11,31 +11,40 @@ export class DatabaseService {
   constructor(public firebaseDb: AngularFireDatabase) { }
 
   getEventsById(id: string): Observable<any> {
-    return this.firebaseDb.object(`events/${id}`).snapshotChanges();        
+    return this.firebaseDb.object(`events/${id}`).snapshotChanges();
   }
 
-  updateEvent(id: string, comissionDeposit: number, comissionCard: number) {
-    this.firebaseDb.object(`events/${id}`).update({ comission_deposit: comissionDeposit, comission_card: comissionCard });
+  getPaymentMethods() {
+
+  }
+
+  getUserById(id: string): Observable<any> {
+    return this.firebaseDb.object(`users/${id}`).snapshotChanges();
+  }
+
+  updateEvent(id: string, paymentMethod: string, comissionFixed: number, comissionPercent: number) {
+    this.firebaseDb.object(`events/${id}/comissions/${paymentMethod}`).update({ name: paymentMethod, fixed: comissionFixed, percent: comissionPercent });
+  }
+
+  updateUser(id: string, paymentMethod: string, comissionFixed: number, comissionPercent: number) {
+    this.firebaseDb.object(`users/${id}/comissions/${paymentMethod}`).update({ fixed: comissionFixed, percent: comissionPercent });
   }
 
   getEvents(): Observable<any> {
     return this.firebaseDb.list("events").snapshotChanges();
   }
 
+  getUsers(): Observable<any> {
+    return this.firebaseDb.list("users").snapshotChanges();
+  }
+
   getTransactionByid(key: string): Observable<any> {
-    return this.firebaseDb.object(`transactions/${key}`).snapshotChanges();    
+    return this.firebaseDb.object(`transactions/${key}`).snapshotChanges();
   }
 
   pushBooking(event: Event, paymentMethod: string, price: number, quantity: number) {
     var timestamp = new Date().getTime();
-    var record = { event_id: event.id, event_name: event.name, payment_method: paymentMethod, price: price, quantity: quantity, id: timestamp }
-    if(event.comissionDeposit){
-      record["deposit_comission"] = event.comissionDeposit
-    }
-    if(event.comissionCard){
-      record["card_comission"] = event.comissionCard
-    }
+    var record = { event_id: event.id, event_name: event.name, payment_method: paymentMethod, price: price, quantity: quantity, id: timestamp, user_id: event.userId }
     return this.firebaseDb.list("transactions").push(record).key
   }
-
 }

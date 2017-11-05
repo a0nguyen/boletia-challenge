@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-image">
+    <img [attr.src]="event.pictureUrl">
+    <span class="card-title" *ngIf="displayedUser">organized by: {{displayedUser.name}}</span>
+  </div>
+  <div class="card-content">
+    <p>{{event.name}}</p>
+  </div>
+  <div class="card-action">
+    <a *ngIf="action == 'book'" [attr.href]="'/events/' + event.id + '/book'">Reservar</a>
+    <a *ngIf="action == 'comissions'" [attr.href]="'/events/' + event.id + '/comissions'">Agregar comisiones</a>    
+  </div>
+</div>

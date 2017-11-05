@@ -1,52 +1,40 @@
 module.exports = function () {
     this.CalculateComissionAndTotal = class CalculateComissionAndTotal {
-        constructor(transaction, functionToGetComission, paymentMethods, paymentMethodName, quantity, unitPrice) {
-            this.listOfEventComission = functionToGetComission(transaction)
-            this.listOfPaymentMethod = paymentMethods
+        constructor(user, event, defaultComissions, paymentMethodName, transaction, boletiaFixedComission) {
+            this.user = user
+            this.event = event
+            this.defaultComissions = defaultComissions
             this.paymentMethodName = paymentMethodName
-            this.quantity = quantity
-            this.unitPrice = unitPrice
+            this.quantity = transaction.quantity
+            this.unitPrice = transaction.price
+            this.boletiaFixedComission = boletiaFixedComission
         }
 
         getPaymentMethodComission() {
-            var comissionFromEvent = this.listOfEventComission.filter((eventComission) => {
-                return eventComission.paymentMethod.name == this.paymentMethodName;
-            });
-            var defaultComission = this.listOfPaymentMethod.filter((paymentMethod) => {
-                return paymentMethod.name == this.paymentMethodName;
-            });
-            this.comissionCalcul = comissionFromEvent[0] && comissionFromEvent[0].paymentMethod.calculFunction ? comissionFromEvent[0].paymentMethod.calculFunction : defaultComission[0].calculFunction
-            this.comission = comissionFromEvent[0] ? comissionFromEvent[0].comission : defaultComission[0].comission
-        }
-
-        calculateTotalComission() {
-            this.totalComission = Math.round(this.comissionCalcul(this.quantity, this.comission, this.unitPrice), -2)
+            if (this.event.comissions && this.event.comissions[this.paymentMethodName]) {
+                this.comission = { fixed: this.event.comissions[this.paymentMethodName].fixed, percent: this.event.comissions[this.paymentMethodName].percent }
+            }
+            else if (this.user.comissions && this.user.comissions[this.paymentMethodName]) {
+                this.comission = { fixed: this.user.comissions[this.paymentMethodName].fixed, percent: this.user.comissions[this.paymentMethodName].percent }
+            } else {
+                this.comission = this.defaultComissions[this.paymentMethodName]
+            }
         }
 
         calculateTotalPrice() {
-            this.totalPrice = this.totalComission + this.quantity * this.unitPrice
+            this.totalPrice = Math.round(this.quantity * (this.unitPrice + this.comission.fixed + this.unitPrice * this.comission.percent / 100) + this.boletiaFixedComission, -2)
+            console.log(this.totalPrice)
+        }
+
+        calculateTotalComission() {
+            this.totalComission = this.totalPrice - this.quantity * this.unitPrice
         }
 
         call() {
             this.getPaymentMethodComission()
-            this.calculateTotalComission()
             this.calculateTotalPrice()
+            this.calculateTotalComission()
             return { total_comission: this.totalComission, total_price: this.totalPrice }
         }
-    },
-
-        this.EventComission = class EventComission {
-            constructor(paymentMethod, comission) {
-                this.paymentMethod = paymentMethod;
-                this.comission = comission
-            }
-        },
-
-        this.PaymentMethod = class PaymentMethod {
-            constructor(name, defaultComission, calculFunction) {
-                this.name = name;
-                this.comission = defaultComission
-                this.calculFunction = calculFunction
-            }
-        }
+    }
 }

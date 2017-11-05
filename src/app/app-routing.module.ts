@@ -5,11 +5,13 @@ import { EventsPageComponent } from './components/events-page/events-page.compon
 import { BookPageComponent } from './components/book-page/book-page.component';
 import { Router, ActivatedRoute, Params } from '@angular/router'
 import { ReceiptPageComponent } from './components/receipt-page/receipt-page.component';
+import { ComissionsPageComponent } from './components/comissions-page/comissions-page.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
     { path: 'events', component: EventsPageComponent },
     { path: 'events/:id/book', component: BookPageComponent },
+    { path: 'events/:id/comissions', component: ComissionsPageComponent },    
     { path: 'receipt/:id', component: ReceiptPageComponent }
 ];
 

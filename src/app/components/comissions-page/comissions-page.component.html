@@ -1,0 +1,169 @@
+<div class="container" *ngIf="event && user">
+  <div class="row center">
+    <h1 class="header orange-text center">Editar las comisiones del evento {{event.name}}</h1>
+  </div>
+  <div class="row">
+    <form name="changeCom" #changeCom="ngForm" (ngSubmit)="submit()">
+      <h5>
+        <span style="font-size:15px" class="orange-text">
+          <i class="material-icons orange-text" style="font-size:2rem">person</i>
+        </span>
+        <span class="grey-text text-darken-2">Nivel 1 : comisiones para el organizador {{user.name}}</span>
+      </h5>
+      <table>
+        <thead>
+          <tr>
+            <th>Payment Method</th>
+            <th>porcentage</th>
+            <th>parte fija</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>tarjeta</td>
+            <td>
+              <input class="col s3"  type="number" [(ngModel)]="userCardComission.percent" 
+                name="user-comission-card-percent" >
+            </td>
+            <td>
+              <input class="col s3"  type="number" [(ngModel)]="userCardComission.fixed" 
+                name="user-comission-card-fixed" >
+            </td>
+          </tr>
+          <tr>
+            <td>oxxo</td>
+            <td>
+              <input class="col s3"  type="number" [(ngModel)]="userDepositComission.percent" 
+                name="user-comission-oxxo-percent" >
+            </td>
+            <td>
+              <input class="col s3"  type="number" [(ngModel)]="userDepositComission.fixed" 
+                name="user-comission-oxxo-percent" >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h5>
+        <span style="font-size:15px" class="orange-text">
+          <i class="material-icons orange-text" style="font-size:2rem">event</i>
+        </span>
+        <span class="grey-text text-darken-2">Nivel 2 : comisiones unicamente para el evento {{event.name}}</span>
+      </h5>
+      <table>
+        <thead>
+          <tr>
+            <th>Payment Method</th>
+            <th>porcentage</th>
+            <th>parte fija</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>tarjeta</td>
+            <td>
+              <input class="col s3"  type="number" [(ngModel)]="eventCardComission.percent"
+                name="event-comission-card-percent" >
+            </td>
+            <td>
+              <input class="col s3"  type="number" [(ngModel)]="eventCardComission.fixed"
+                name="event-comission-card-fixed" >
+            </td>
+          </tr>
+          <tr>
+            <td>oxxo</td>
+            <td>
+              <input class="col s3"  type="number" [(ngModel)]="eventDepositComission.percent" 
+                name="event-comission-oxxo-percent" >
+            </td>
+            <td>
+              <input class="col s3"  type="number" [(ngModel)]="eventDepositComission.fixed" 
+                name="event-comission-oxxo-fixed" >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>      
+      <button class="col s3 btn-large waves-effect waves-light orange">Update comisiones</button>      
+    </form>
+    <!-- <form name="changeCom" class="col s12" #changeCom="ngForm" (ngSubmit)="submit()">
+      <div class="col s11 push-s1">
+        <h5 >
+          <span style="font-size:15px" class="orange-text">
+            <i class="material-icons orange-text" style="font-size:2rem">person</i>
+          </span>
+          <span class="grey-text text-darken-2">Nivel 1 : comisiones para el organizador {{user.name}}</span>
+        </h5>
+        <div class="col s12">
+          <p class="grey-text">comisiones para tarjetas : </p>
+          <br>
+          <div class="input-field push-s1 col s5">
+            <input  type="number" [(ngModel)]="comissionCard" id="event-comission-card" name="event-comission-card"
+              >
+            <label for="event-comission-card" class="active">porcentage</label>
+          </div>
+          <div class="input-field push-s1 col s5">
+            <input  type="number" [(ngModel)]="comissionDeposit" id="event-comission-deposit" name="event-comission-deposit"
+              >
+            <label for="event-comission-card" class="active">parte fija en $</label>
+          </div>
+        </div>
+        <br>
+        <div class="col s12">
+          <p class="grey-text">comisiones para depositos : </p>
+          <br>
+          <div class="input-field push-s1 col s5">
+            <input  type="number" [(ngModel)]="comissionCard" id="event-comission-card" name="event-comission-card"
+              >
+            <label for="event-comission-card" class="active">porcentage</label>
+          </div>
+          <div class="input-field push-s1 col s5">
+            <input  type="number" [(ngModel)]="comissionDeposit" id="event-comission-deposit" name="event-comission-deposit"
+              >
+            <label for="event-comission-card" class="active">parte fija en $</label>
+          </div>
+        </div>
+      </div>
+      <div class="col s11 push-s1">
+        <h5 >
+          <span style="font-size:15px" class="orange-text">
+            <i class="material-icons orange-text" style="font-size:2rem">event</i>
+          </span>
+          <span class="grey-text text-darken-2">Nivel 2 : comisiones unicamente para el evento {{event.name}}</span>
+        </h5>
+        <div class="col s12">
+          <p class="grey-text">comisiones para tarjetas : </p>
+          <br>
+          <div class="input-field push-s1 col s5">
+            <input  type="number" [(ngModel)]="comissionCard" id="event-comission-card" name="event-comission-card"
+              >
+            <label for="event-comission-card" class="active">porcentage</label>
+          </div>
+          <div class="input-field push-s1 col s5">
+            <input  type="number" [(ngModel)]="comissionDeposit" id="event-comission-deposit" name="event-comission-deposit"
+              >
+            <label for="event-comission-card" class="active">parte fija en $</label>
+          </div>
+        </div>
+        <br>
+        <div class="col s12">
+          <p class="grey-text">comisiones para depositos : </p>
+          <br>
+          <div class="input-field push-s1 col s5">
+            <input  type="number" [(ngModel)]="comissionCard" id="event-comission-card" name="event-comission-card"
+              >
+            <label for="event-comission-card" class="active">porcentage</label>
+          </div>
+          <div class="input-field push-s1 col s5">
+            <input  type="number" [(ngModel)]="comissionDeposit" id="event-comission-deposit" name="event-comission-deposit"
+              >
+            <label for="event-comission-card" class="active">parte fija en $</label>
+          </div>
+        </div>
+      </div>
+      <button class="col push-s1 s3 btn-large waves-effect waves-light orange">Crear booking</button>
+    </form> -->
+
+  </div>

@@ -23,16 +23,8 @@
 <div class="container" *ngIf="events">
   <h1>No te lo podes perder</h1>
   <div class="row center">
-    <div *ngFor="let event of events" class="card col s3">
-      <div class="card-image">
-        <img [attr.src]="event.pictureUrl">
-      </div>
-      <div class="card-content">
-        <p>{{event.name}}</p>
-      </div>
-      <div class="card-action">
-          <a [routerLink]="['events', event.id, 'book']">Reservar</a>          
-      </div>
+    <div *ngFor="let event of events" class="col s4">
+      <app-event-card *ngIf="event && users" [action]="'book'" [event]="event" [users]="users"></app-event-card>
     </div>
   </div>
 

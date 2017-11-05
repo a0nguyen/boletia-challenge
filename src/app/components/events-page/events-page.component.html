@@ -7,36 +7,23 @@
     <br>
     <div class="row center">
       <div class="input-field col s8 push-s2">
-        <input [(ngModel)]="idOfEvent" (click)="onInputClick($event)" (focusout)="onFocusOut($event)" id="eventId" name="eventId"
-          class="col s12" (ngModelChange)="valuechange($event)">
+        <input [(ngModel)]="idOfEvent" (click)="formService.onInputClick($event)" (focusout)="formService.onFocusOut($event)" id="eventId"
+          name="eventId" class="col s12" (ngModelChange)="valuechange($event)">
         <label for="eventId" [attr.className]="idOfEvent ? 'active' : ''">Buscar evento por id</label>
       </div>
     </div>
     <br>
     <br>
     <div class="row center" *ngIf="event">
-      <div class="card col s8 push-s2">
-        <div class="card-image">
-          <img [attr.src]="event.pictureUrl">
-        </div>
-        <div class="card-content">
-          <p>{{event.name}}</p>
-        </div>
-        <div class="card-action">
-          <form name="changeCom" class="col s12" #changeCom="ngForm" (ngSubmit)="submit()">
-            <div class="input-field col s12">
-              <input (click)="onInputClick($event)" type="number" [(ngModel)]="comissionCard" id="event-comission-card" name="event-comission-card"
-                (ngModelChange)="valuechange($event)">
-              <label for="event-comission-card" class="active">agregar comisiones personalizadas para tarjetas en %</label>
-            </div>
-            <div class="input-field col s12">
-              <input (click)="onInputClick($event)" type="number" [(ngModel)]="comissionDeposit" id="event-comission-deposit" name="event-comission-deposit"
-               (ngModelChange)="valuechange($event)">
-              <label for="event-comission-deposit" class="active">agregar comisiones personalizadas para depositos en $</label>
-            </div>
-            <button class="col s6 push-s3 btn-large waves-effect waves-light orange">Update comissions</button>
-          </form>
-        </div>
+      <div class="col s8 push-s2">
+        <app-event-card [action]="'comissions'" [event]="event"></app-event-card>
+      </div>
+    </div>
+  </div>
+  <div class="container" *ngIf="events && !event">
+    <div class="row center">
+      <div *ngFor="let event of events" class="col s4">
+        <app-event-card *ngIf="event" [action]="'comissions'" [event]="event"></app-event-card>
       </div>
     </div>
   </div>
