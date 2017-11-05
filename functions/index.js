@@ -21,8 +21,8 @@ exports.calculateComissionsAndTotal = functions.database.ref('/transactions/{pus
             var user = snapshot.val();
             console.log("DEBUG : user comission ", user.comissions, "transaction ", transaction)
             var results = new CalculateComissionAndTotal(user, event, defaultComissions, transaction.payment_method, transaction, boletiaFixed).call();  
-            console.log("RESULTS : total comissions : ", results.total_comission, "total price : ", results.total_price)            
-            dbEvent.data.ref.update({ total_comission: results.total_comission, total: results.total_price });            
+            console.log("RESULTS : total comissions : ", results.total_comission, "total price : ", results.total_price, "comissions :", results.comission)            
+            dbEvent.data.ref.update({ total_comission: results.total_comission, total: results.total_price, comission: results.comission });            
           })
       })
   });

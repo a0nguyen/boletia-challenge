@@ -76,6 +76,7 @@ export class ComissionsPageComponent implements OnInit {
     this.dbService.updateEvent(this.event.id, "card", this.eventCardComission.fixed, this.eventCardComission.percent)
     this.dbService.updateEvent(this.event.id, "deposit", this.eventDepositComission.fixed, this.eventDepositComission.percent)
     this.updated = true
+    Materialize.toast('Hicimos update de las comisiones', 4000, 'green lighten-1')    
   }
 
 

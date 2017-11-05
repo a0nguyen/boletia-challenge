@@ -14,6 +14,7 @@
             <th>precio</th>
             <th>calculo de comisiones</th>
             <th>total a pagar</th>
+            <th>comisiones aplicadas</th>            
           </tr>
         </thead>
 
@@ -21,8 +22,9 @@
           <tr>
             <td class="e2e-quantity">{{transaction.quantity}}</td>
             <td class="e2e-price">{{transaction.price}}</td>
-            <td class="e2e-total-comission">{{transaction.totalComission}}</td>
-            <td class="e2e-total">{{transaction.totalPrice}}</td>
+            <td class="e2e-total-comission">{{transaction.totalComission ? transaction.totalComission : "calculando..."}}</td>
+            <td class="e2e-total">{{transaction.totalPrice ? transaction.totalPrice : "calculando..."}}</td>
+            <td class="e2e-list-comission">{{ comission ? comission : "esperando..."}}</td>            
           </tr>
         </tbody>
       </table>

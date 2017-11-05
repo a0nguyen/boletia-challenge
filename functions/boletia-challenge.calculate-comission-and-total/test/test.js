@@ -26,6 +26,8 @@ describe('#CalculateComissionAndTotal', function () {
                     var result = new CalculateComissionAndTotal(user, event, defaultComissions, "card", transaction, boletiaFixed).call();
                     expect(result.total_comission).to.equal(20);
                     expect(result.total_price).to.equal(220);
+                    expect(result.comission.fixed).to.equal(event.comissions.card.fixed); 
+                    expect(result.comission.percent).to.equal(event.comissions.card.percent);                                        
                 });
             })
             describe("when select method is not matching event comission", function () {
@@ -34,6 +36,8 @@ describe('#CalculateComissionAndTotal', function () {
                     var result = new CalculateComissionAndTotal(user, event, defaultComissions, "deposit", transaction, boletiaFixed).call();
                     expect(result.total_comission).to.equal(14);
                     expect(result.total_price).to.equal(214);
+                    expect(result.comission.fixed).to.equal(defaultComissions.deposit.fixed);   
+                    expect(result.comission.percent).to.equal(defaultComissions.deposit.percent);                                                            
                 });
             })
         })
@@ -49,6 +53,8 @@ describe('#CalculateComissionAndTotal', function () {
                     var result = new CalculateComissionAndTotal(user, event, defaultComissions, "card", transaction, boletiaFixed).call();
                     expect(result.total_comission).to.equal(20);
                     expect(result.total_price).to.equal(220);
+                    expect(result.comission.fixed).to.equal(event.comissions.card.fixed); 
+                    expect(result.comission.percent).to.equal(event.comissions.card.percent);                                                            
                 });
             })
             describe("when select method is matching event comission deposit", function () {
@@ -56,6 +62,8 @@ describe('#CalculateComissionAndTotal', function () {
                     var result = new CalculateComissionAndTotal(user, event, defaultComissions, "deposit", transaction, boletiaFixed).call();
                     expect(result.total_comission).to.equal(18);
                     expect(result.total_price).to.equal(218);
+                    expect(result.comission.fixed).to.equal(event.comissions.deposit.fixed); 
+                    expect(result.comission.percent).to.equal(event.comissions.deposit.percent);                                                            
                 });
             })
         })
@@ -72,6 +80,8 @@ describe('#CalculateComissionAndTotal', function () {
                 var result = new CalculateComissionAndTotal(user, event, defaultComissions, "card", transaction, boletiaFixed).call();
                 expect(result.total_comission).to.equal(20);
                 expect(result.total_price).to.equal(220);
+                expect(result.comission.fixed).to.equal(user.comissions.card.fixed);   
+                expect(result.comission.percent).to.equal(user.comissions.card.percent);                                                    
             });
         })
         describe("when select method is not matching user comission", function () {
@@ -79,7 +89,8 @@ describe('#CalculateComissionAndTotal', function () {
                 var result = new CalculateComissionAndTotal(user, event, defaultComissions, "deposit", transaction, boletiaFixed).call();
                 expect(result.total_comission).to.equal(14);
                 expect(result.total_price).to.equal(214);
-            });
+                expect(result.comission.fixed).to.equal(defaultComissions.deposit.fixed);   
+                expect(result.comission.percent).to.equal(defaultComissions.deposit.percent);               });
         })
         describe("when there are comission by event matching payment method", function () {
             beforeEach(
@@ -92,6 +103,8 @@ describe('#CalculateComissionAndTotal', function () {
                 var result = new CalculateComissionAndTotal(user, event, defaultComissions, "card", transaction, boletiaFixed).call();
                 expect(result.total_comission).to.equal(18);
                 expect(result.total_price).to.equal(218);
+                expect(result.comission.percent).to.equal(event.comissions.card.percent);  
+                expect(result.comission.fixed).to.equal(event.comissions.card.fixed);                                                                    
             });
         })
         describe("when there are comission by event not matching payment method", function () {
@@ -106,6 +119,8 @@ describe('#CalculateComissionAndTotal', function () {
                     var result = new CalculateComissionAndTotal(user, event, defaultComissions, "deposit", transaction, boletiaFixed).call();
                     expect(result.total_comission).to.equal(13);
                     expect(result.total_price).to.equal(213);
+                    expect(result.comission.fixed).to.equal(user.comissions.deposit.fixed);
+                    expect(result.comission.percent).to.equal(user.comissions.deposit.percent);                                                                                            
                 });
             })
         })
@@ -121,6 +136,8 @@ describe('#CalculateComissionAndTotal', function () {
             var result = new CalculateComissionAndTotal(user, event, defaultComissions, "card", transaction, boletiaFixed).call();
             expect(result.total_comission).to.equal(22);
             expect(result.total_price).to.equal(222);
+            expect(result.comission.fixed).to.equal(defaultComissions.card.fixed); 
+            expect(result.comission.percent).to.equal(defaultComissions.card.percent);                                                                            
         });
     })
 });

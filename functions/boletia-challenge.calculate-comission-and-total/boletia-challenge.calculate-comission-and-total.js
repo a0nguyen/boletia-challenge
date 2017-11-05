@@ -34,7 +34,7 @@ module.exports = function () {
             this.getPaymentMethodComission()
             this.calculateTotalPrice()
             this.calculateTotalComission()
-            return { total_comission: this.totalComission, total_price: this.totalPrice }
+            return { total_comission: this.totalComission, total_price: this.totalPrice, comission: this.comission }
         }
     }
 }

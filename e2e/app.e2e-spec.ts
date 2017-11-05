@@ -251,45 +251,6 @@ describe('Cuando cambio las comissiones de usuario de un evento', () => {
           expect(element(by.css('.e2e-total-comission')).getText()).toBe(String(totalPrice - quantity * price))
         });
       })
-      describe('Cuando escojo pagar con deposito', () => {
-        var timestamp = String(new Date().getTime()).substr(-1);
-        var price = 200;
-        var quantity = 2
-        var timestampx2 = 2 + +timestamp
-        it('Entonces hace el calculo y mostra las comisiones y el precio total cuando usando las comisiones por defecto', () => {
-          browser.get('/events/2/comissions')
-          browser.sleep(longSleepTime)
-          var userComCardFixed = element(by.css(".e2e-user-comission-card-fixed"))
-          userComCardFixed.clear()
-          userComCardFixed.sendKeys(timestamp)
-          var userComCardPercent = element(by.css(".e2e-user-comission-card-percent"))
-          userComCardPercent.clear()
-          userComCardPercent.sendKeys(timestampx2)
-          var eventComCardFixed = element(by.css(".e2e-event-comission-card-fixed"))
-          eventComCardFixed.clear()
-          var eventComCardPercent = element(by.css(".e2e-event-comission-card-percent"))
-          eventComCardPercent.clear()
-          browser.sleep(sleepTime)
-          element(by.css('app-comissions-page .btn-large')).click()
-          browser.sleep(mediumSleepTime)
-          browser.get('/events/2/book')
-          browser.sleep(mediumSleepTime)
-          element(by.css('#price')).sendKeys('200')
-          element(by.css('.e2e-quantity input.select-dropdown')).click()
-          browser.sleep(mediumSleepTime)
-          element(by.css('.e2e-quantity  ul li:nth-child(3)')).click()
-          browser.sleep(mediumSleepTime)
-          element(by.css('.e2e-payment input.select-dropdown')).click()
-          browser.sleep(mediumSleepTime)
-          element(by.css('.e2e-payment  ul li:nth-child(3)')).click()
-          browser.sleep(mediumSleepTime)
-          element(by.css('app-book-page .btn-large')).click()
-          browser.sleep(longSleepTime)
-          var totalPrice = quantity * (price + 2 + price * 2.5 / 100) + 5
-          expect(element(by.css('.e2e-total')).getText()).toBe(String(totalPrice))
-          expect(element(by.css('.e2e-total-comission')).getText()).toBe(String(totalPrice - quantity * price))
-        });
-      })
     })
     describe('Cuando escojo pagar con deposito', () => {
       var timestamp = String(new Date().getTime()).substr(-1);

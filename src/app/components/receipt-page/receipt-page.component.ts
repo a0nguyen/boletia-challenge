@@ -12,13 +12,18 @@ import { Transaction } from '../../shared/models/transaction.model';
 })
 export class ReceiptPageComponent implements OnInit {
 
+  comission: string
   constructor(public route: ActivatedRoute, public router: Router, public dbService: DatabaseService) { }
   transaction: Transaction
   ngOnInit() {
     this.route.params
       .switchMap((params: Params) => this.dbService.getTransactionByid(params['id']))
       .subscribe(transaction => {
-        this.transaction = new Transaction().deserialize(transaction.payload.val(), transaction.key)
+        var json = transaction.payload.val()
+        this.transaction = new Transaction().deserialize(json, transaction.key)
+        if(json.comission){
+          this.comission = `${json.comission.fixed}$ + ${json.comission.percent}%`          
+        }
       })
   }
 
