@@ -43,10 +43,4 @@ export class HomepageComponent implements OnInit {
     })
   }
 
-  changePicture() {
-    setTimeout(() => {
-      this.url = "https://bltassets-cdn3.global.ssl.fastly.net/images/home/home-04.jpg"
-    }, 3000)
-  }
-
 }

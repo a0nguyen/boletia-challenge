@@ -7,23 +7,23 @@
     <br>
     <div class="row center">
       <div class="input-field col s8 push-s2">
-        <input [(ngModel)]="idOfEvent" (click)="formService.onInputClick($event)" (focusout)="formService.onFocusOut($event)" id="eventId"
+        <input [(ngModel)]="idOfEvent" (click)="onInputClick($event)" (focusout)="onFocusOut($event)" id="eventId"
           name="eventId" class="col s12" (ngModelChange)="valuechange($event)">
         <label for="eventId" [attr.className]="idOfEvent ? 'active' : ''">Buscar evento por id</label>
       </div>
     </div>
     <br>
     <br>
-    <div class="row center" *ngIf="event">
+    <div class="row center" *ngIf="event && users">
       <div class="col s8 push-s2">
-        <app-event-card [action]="'comissions'" [event]="event"></app-event-card>
+        <app-event-card [action]="'comissions'"  [users]="users" [event]="event"></app-event-card>
       </div>
     </div>
   </div>
-  <div class="container" *ngIf="events && !event">
+  <div class="container" *ngIf="events && users && !event">
     <div class="row center">
       <div *ngFor="let event of events" class="col s4">
-        <app-event-card *ngIf="event" [action]="'comissions'" [event]="event"></app-event-card>
+        <app-event-card *ngIf="event" [users]="users" [action]="'comissions'" [event]="event"></app-event-card>
       </div>
     </div>
   </div>

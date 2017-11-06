@@ -42,12 +42,12 @@ describe('Dado que estas en personalizando comisiones para un de evento', () => 
       browser.sleep(sleepTime)
       // check that user has been update
       browser.get('/events/2/comissions')
-      browser.sleep(mediumSleepTime)
+      browser.sleep(longSleepTime)
       expect(element(by.css(".e2e-user-comission-card-fixed")).getAttribute("value")).toBe(`${timestamp}`)
       expect(element(by.css(".e2e-user-comission-card-percent")).getAttribute("value")).toBe(`${2 + +timestamp}`)
       // check that user has been update
       browser.get('/events/7/comissions')
-      browser.sleep(mediumSleepTime)
+      browser.sleep(longSleepTime)
       expect(element(by.css(".e2e-user-comission-card-fixed")).getAttribute("value")).toBe(`${timestamp}`)
       expect(element(by.css(".e2e-user-comission-card-percent")).getAttribute("value")).toBe(`${2 + +timestamp}`)
     });
@@ -69,12 +69,12 @@ describe('Dado que estas en personalizando comisiones para un de evento', () => 
       browser.sleep(sleepTime)
       // check that event has been update
       browser.get('/events/2/comissions')
-      browser.sleep(mediumSleepTime)
+      browser.sleep(longSleepTime)
       expect(element(by.css(".e2e-event-comission-card-fixed")).getAttribute("value")).toBe(`${timestamp}`)
       expect(element(by.css(".e2e-event-comission-card-percent")).getAttribute("value")).toBe(`${2 + +timestamp}`)
       // check that only the event has been update
       browser.get('/events/7/comissions')
-      browser.sleep(mediumSleepTime)
+      browser.sleep(longSleepTime)
       expect(element(by.css(".e2e-event-comission-card-fixed")).getAttribute("value")).not.toBe(`${timestamp}`)
       expect(element(by.css(".e2e-event-comission-card-percent")).getAttribute("value")).not.toBe(`${2 + timestamp}`)
     });
@@ -85,7 +85,7 @@ describe('Dado que ingresas a la página de compra', () => {
   browser.ignoreSynchronization = true
   it('Entonces mostrar el formulario para ingresar el precio del boleto Y la cantidad de boletos Y seleccionar el método de pago', () => {
     browser.get('/events/2/book')
-    browser.sleep(mediumSleepTime)
+    browser.sleep(longSleepTime)
     expect(element(by.css('#price'))).toBeTruthy()
     expect(element(by.css('#paymentMehod'))).toBeTruthy()
     expect(element(by.css('#quantity'))).toBeTruthy()
@@ -93,7 +93,7 @@ describe('Dado que ingresas a la página de compra', () => {
   describe('Cuando se hace submit', () => {
     it('monstrar el resumen', () => {
       browser.get('/events/2/book')
-      browser.sleep(mediumSleepTime)
+      browser.sleep(longSleepTime)
       element(by.css('#price')).sendKeys('200')
       element(by.css('.e2e-quantity input.select-dropdown')).click()
       browser.sleep(mediumSleepTime)
@@ -114,7 +114,7 @@ describe('Dado que ya creaste un booking, después de realizar el cálculo', () 
   browser.ignoreSynchronization = true
   it('Entonces mostrar el resumen de compra que incluye la cantidad de boletos comprados, el precio Y el cálculo de las comisiones Y el total a pagar', () => {
     browser.get('/events/2/book')
-    browser.sleep(mediumSleepTime)
+    browser.sleep(longSleepTime)
     element(by.css('#price')).sendKeys('2')
     element(by.css('.e2e-quantity input.select-dropdown')).click()
     browser.sleep(mediumSleepTime)
@@ -159,7 +159,7 @@ describe('Cuando cambio las comissiones de usuario de un evento', () => {
         browser.sleep(mediumSleepTime)
         //check current event
         browser.get('/events/2/book')
-        browser.sleep(mediumSleepTime)
+        browser.sleep(longSleepTime)
         element(by.css('#price')).sendKeys('200')
         element(by.css('.e2e-quantity input.select-dropdown')).click()
         browser.sleep(mediumSleepTime)
@@ -176,7 +176,7 @@ describe('Cuando cambio las comissiones de usuario de un evento', () => {
         expect(element(by.css('.e2e-total-comission')).getText()).toBe(String(totalPrice - quantity * price))
         //check event with the same user
         browser.get('/events/7/book')
-        browser.sleep(mediumSleepTime)
+        browser.sleep(longSleepTime)
         element(by.css('#price')).sendKeys('200')
         element(by.css('.e2e-quantity input.select-dropdown')).click()
         browser.sleep(mediumSleepTime)
@@ -217,7 +217,7 @@ describe('Cuando cambio las comissiones de usuario de un evento', () => {
           browser.sleep(mediumSleepTime)
           //check current event
           browser.get('/events/2/book')
-          browser.sleep(mediumSleepTime)
+          browser.sleep(longSleepTime)
           element(by.css('#price')).sendKeys('200')
           element(by.css('.e2e-quantity input.select-dropdown')).click()
           browser.sleep(mediumSleepTime)
@@ -234,7 +234,7 @@ describe('Cuando cambio las comissiones de usuario de un evento', () => {
           expect(element(by.css('.e2e-total-comission')).getText()).toBe(String(totalPrice - quantity * price))
           //check event with the same user
           browser.get('/events/7/book')
-          browser.sleep(mediumSleepTime)
+          browser.sleep(longSleepTime)
           element(by.css('#price')).sendKeys('200')
           element(by.css('.e2e-quantity input.select-dropdown')).click()
           browser.sleep(mediumSleepTime)
@@ -275,7 +275,7 @@ describe('Cuando cambio las comissiones de usuario de un evento', () => {
         browser.sleep(mediumSleepTime)
         //check current event
         browser.get('/events/2/book')
-        browser.sleep(mediumSleepTime)
+        browser.sleep(longSleepTime)
         element(by.css('#price')).sendKeys('200')
         element(by.css('.e2e-quantity input.select-dropdown')).click()
         browser.sleep(mediumSleepTime)
@@ -319,7 +319,7 @@ describe('Cuando cambio las comissiones de un evento', () => {
       browser.sleep(mediumSleepTime)
       //check current event
       browser.get('/events/2/book')
-      browser.sleep(mediumSleepTime)
+      browser.sleep(longSleepTime)
       element(by.css('#price')).sendKeys('200')
       element(by.css('.e2e-quantity input.select-dropdown')).click()
       browser.sleep(mediumSleepTime)
@@ -359,7 +359,7 @@ describe('Cuando cambio las comissiones de un evento', () => {
       browser.sleep(mediumSleepTime)
       //check current event
       browser.get('/events/2/book')
-      browser.sleep(mediumSleepTime)
+      browser.sleep(longSleepTime)
       element(by.css('#price')).sendKeys('200')
       element(by.css('.e2e-quantity input.select-dropdown')).click()
       browser.sleep(mediumSleepTime)
@@ -386,7 +386,7 @@ describe('Cuando no cambio las comissiones de un evento', () => {
       var quantity = 2
       it('Entonces hace el calculo y mostra las comisiones por default y el precio total cuando ', () => {
         browser.get('/events/lArEsa124/book')
-        browser.sleep(mediumSleepTime)
+        browser.sleep(longSleepTime)
         element(by.css('#price')).sendKeys('200')
         element(by.css('.e2e-quantity input.select-dropdown')).click()
         browser.sleep(mediumSleepTime)
@@ -409,7 +409,7 @@ describe('Cuando no cambio las comissiones de un evento', () => {
       var quantity = 2
       it('Entonces hace el calculo y mostra las comisiones y el precio total cuando ', () => {
         browser.get('/events/lArEsa124/book')
-        browser.sleep(mediumSleepTime)
+        browser.sleep(longSleepTime)
         element(by.css('#price')).sendKeys('200')
         element(by.css('.e2e-quantity input.select-dropdown')).click()
         browser.sleep(mediumSleepTime)
