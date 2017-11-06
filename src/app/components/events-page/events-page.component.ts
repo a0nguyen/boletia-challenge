@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../../shared/services/database.service';
-import { FormService } from '../../shared/services/form.service';
 import { Event } from '../../shared/models/event.model';
 import { isNumeric } from 'rxjs/util/isNumeric';
 declare var Materialize: any;
@@ -9,19 +8,15 @@ declare var Materialize: any;
   selector: 'app-events-page',
   templateUrl: './events-page.component.html',
   styleUrls: ['./events-page.component.css'],
-  providers: [DatabaseService, FormService],
+  providers: [DatabaseService],
 })
 export class EventsPageComponent implements OnInit {
 
-  constructor(public dbService: DatabaseService, public formService: FormService) { }
+  constructor(public dbService: DatabaseService) { }
 
   idOfEvent: string = ""
   event: Event;
   events: Event[];  
-  comissionDeposit: number;
-  comissionCard: number;
-  eventKey: string
-  updated: boolean = false;
 
   
   ngOnInit() {
